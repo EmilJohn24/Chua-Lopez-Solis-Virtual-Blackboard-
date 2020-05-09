@@ -53,12 +53,6 @@ index = 0
 
 
 def prepare_canvas(canvas):
-
-    #canvas = cv2.rectangle(canvas, (160,rect_top), (255,rect_bottom), colors[0], -1)
-    #canvas = cv2.rectangle(canvas, (275,rect_top), (370,rect_bottom), colors[1], -1)
-    #canvas = cv2.rectangle(canvas, (390,rect_top), (485,rect_bottom), colors[2], -1)
-    #canvas = cv2.rectangle(canvas, (505,rect_top), (600,rect_bottom), colors[3], -1)
-    
     if recordMode:
         center_coord = (450, 50)
         record_color = (0, 153, 255)
@@ -69,10 +63,6 @@ def prepare_canvas(canvas):
     # Label the rectanglular boxes drawn on the image
     if not disabledMode:
         cv2.putText(canvas, "[D] DISABLE   [E] ERASE    [R] RECORD", (int(canvas.shape[1] / 5), rect_top), cv2.FONT_HERSHEY_TRIPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
-    #cv2.putText(canvas, "BLUE", (185, rect_top), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
-    #cv2.putText(canvas, "GREEN", (298, rect_top), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
-    #cv2.putText(canvas, "RED", (420, rect_top), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
-    #cv2.putText(canvas, "YELLOW", (520, rect_top), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (150,150,150), 2, cv2.LINE_AA)#
 
 
 def create_mask(hsv_frame):
@@ -116,8 +106,6 @@ def redraw_points(frame, preclear = True, persistence = -1):
 def capture_screen():
     screen_capture =  ImageGrab.grab()
     screen_capture = np.array(screen_capture,dtype='uint8')
-    #.reshape((screen_capture.size[1], screen_capture.size[0], 3))
-    #screen_capture = np.reshape(screen_capture, (1080, 1920, 3))
     screen_capture =  cv2.resize(screen_capture, (1920, 1080))
     screen_capture = cv2.cvtColor(screen_capture, cv2.COLOR_BGR2RGB)
     return screen_capture
@@ -133,7 +121,6 @@ def erase_point(center, radius):
             if abs(poi[0] - center[0]) <= radius and abs(poi[1] - center[1] <= radius):
                 points[i][j] = None
 
-#.reshape((screen_capture.size[1],screen_capture.size[0],3)) 
 
 def get_fresh_writer(capture_name):
     (height, width, _) = capture_screen().shape
